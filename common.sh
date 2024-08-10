@@ -112,7 +112,7 @@ SCHEMA_SETUP() {
     STAT $?
 
     PRINT Load Master Data
-    mongosh --host mongo.dev.rdevopsb80.online </app/db/master-data.js &>>$LOG_FILE
+    mongosh --mongodb.dev.sridevops.site </app/db/master-data.js &>>$LOG_FILE
     STAT $?
   fi
 
@@ -123,7 +123,7 @@ SCHEMA_SETUP() {
 
     for file in schema master-data app-user; do
       PRINT Load file - $file.sql
-      mysql -h mysql.dev.rdevopsb80.online -uroot -pRoboShop@1 < /app/db/$file.sql &>>$LOG_FILE
+      mysql -h mysql.dev.sridevops.site -uroot -pRoboShop@1 < /app/db/$file.sql &>>$LOG_FILE
       STAT $?
     done
 
