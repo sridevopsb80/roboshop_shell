@@ -7,21 +7,21 @@ component=redis # the component variable is defined individually for each servic
 
 PRINT Disbale redis default
 dnf module disable redis -y &>>$LOG_FILE
-STAT $?
+STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
 PRINT Enable redis 7
 dnf module enable redis:7 -y &>>$LOG_FILE
-STAT $?
+STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
 PRINT Install Redis 7
 dnf install redis -y &>>$LOG_FILE
-STAT $?
+STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
 PRINT Update Redis Config
 sed -i -e '/^bind/ s/127.0.0.1/0.0.0.0/' -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf &>>$LOG_FILE
-STAT $?
+STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
 PRINT Start Redis Service
 systemctl enable redis &>>$LOG_FILE
 systemctl restart redis &>>$LOG_FILE
-STAT $?
+STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh

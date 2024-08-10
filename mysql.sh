@@ -7,15 +7,15 @@ component=mysql # the component variable is defined individually for each servic
 
 PRINT Install MySQL Server
 dnf install mysql-server -y &>>$LOG_FILE
-STAT $?
+STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
 PRINT Start MySQL Service
 systemctl enable mysqld &>>$LOG_FILE
 systemctl restart mysqld &>>$LOG_FILE
-STAT $?
+STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
 PRINT Setup MySQL Root Password
 mysql_secure_installation --set-root-pass RoboShop@1 &>>$LOG_FILE
-STAT $?
+STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
 

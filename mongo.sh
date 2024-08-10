@@ -7,17 +7,17 @@ component=mongo # the component variable is defined individually for each servic
 
 PRINT Copy MongoDB repo file
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
-STAT $?
+STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
 PRINT Install MongoDB
 dnf install mongodb-org -y &>>$LOG_FILE
-STAT $?
+STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
 PRINT Update MongoDB config file
 sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$LOG_FILE
-STAT $?
+STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
 PRINT Start MongoDB Service
 systemctl enable mongod &>>$LOG_FILE
 systemctl restart mongod &>>$LOG_FILE
-STAT $?
+STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
