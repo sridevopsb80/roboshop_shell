@@ -1,5 +1,5 @@
 source common.sh
-component=redis
+component=redis # the component variable is defined individually for each service and is being called in the common.sh file
 
 PRINT Disbale redis default
 dnf module disable redis -y &>>$LOG_FILE

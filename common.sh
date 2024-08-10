@@ -1,3 +1,5 @@
+# the component variable is defined individually for each service and is being called in the common.sh file
+
 LOG_FILE=/tmp/roboshop.log
 rm -f $LOG_FILE
 code_dir=$(pwd)

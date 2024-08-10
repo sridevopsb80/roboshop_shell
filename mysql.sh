@@ -1,5 +1,5 @@
 source common.sh
-component=mysql
+component=mysql # the component variable is defined individually for each service and is being called in the common.sh file
 
 PRINT Install MySQL Server
 dnf install mysql-server -y &>>$LOG_FILE

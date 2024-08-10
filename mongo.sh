@@ -1,5 +1,5 @@
 source common.sh
-component=mongo
+component=mongo # the component variable is defined individually for each service and is being called in the common.sh file
 
 PRINT Copy MongoDB repo file
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
