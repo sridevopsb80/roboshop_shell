@@ -1,15 +1,14 @@
 # the component variable value is defined individually for each service
 
-#defining the log file
-LOG_FILE=/tmp/roboshop.log
+LOG_FILE=/tmp/roboshop.log #defining the log file
 rm -f $LOG_FILE #used to get rid of logs from previous run. do not use if you want to store logs of all runs.
 code_dir=$(pwd)
 
 #defining a print function to replace using echo
-
 #output is being redirected to /tmp/roboshop.log.
 # notice that output will be appended because of the usage of >>
 # PRINT Remove old content - example of print function being called with variables. using $* will print it all
+
 PRINT() {
   echo &>>$LOG_FILE  #used to introduce an empty line
   echo &>>$LOG_FILE #used to introduce an empty line
@@ -33,36 +32,38 @@ STAT() {
   fi
 }
 
+#APP_PREREQ is called in frontend script
+
 APP_PREREQ() {
   PRINT Adding Application User
-  id roboshop &>>$LOG_FILE
-  if [ $? -ne 0 ]; then
+  id roboshop &>>$LOG_FILE #check if roboshop user already exists
+  if [ $? -ne 0 ]; then #ne - not equivalent. if exit status of the previous command is not 0, then add user roboshop
     useradd roboshop &>>$LOG_FILE
   fi
-  STAT $?
+  STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
   PRINT Remove old content
-  rm -rf ${app_path}  &>>$LOG_FILE
-  STAT $?
+  rm -rf ${app_path}  &>>$LOG_FILE #app_path is defined as /app in catalogue.sh
+  STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
   PRINT Create App Directory
   mkdir ${app_path}  &>>$LOG_FILE
-  STAT $?
+  STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
   PRINT Download Application Content
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip  &>>$LOG_FILE
-  STAT $?
+  STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
   PRINT Extract Application Content
   cd ${app_path}
   unzip /tmp/${component}.zip  &>>$LOG_FILE
-  STAT $?
+  STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 }
 
 SYSTEMD_SETUP() {
     PRINT Copy Service file
     cp ${code_dir}/${component}.service /etc/systemd/system/${component}.service &>>$LOG_FILE
-    STAT $?
+    STAT $? # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
     PRINT Start Service
     systemctl daemon-reload &>>$LOG_FILE
