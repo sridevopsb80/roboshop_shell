@@ -1,14 +1,22 @@
-# the component variable is defined individually for each service and is being called in the common.sh file
+# the component variable value is defined individually for each service
 
+#defining the log file
 LOG_FILE=/tmp/roboshop.log
-rm -f $LOG_FILE
+rm -f $LOG_FILE #used to get rid of logs from previous run. do not use if you want to store logs of all runs.
 code_dir=$(pwd)
 
+#defining a print function to replace using echo
+
+#output is being redirected to /tmp/roboshop.log.
+# notice that output will be appended because of the usage of >>
+# PRINT Remove old content - example of print function being called with variables. using $* will print it all
 PRINT() {
-  echo &>>$LOG_FILE
-  echo &>>$LOG_FILE
-  echo " ####################################### $* ########################################" &>>$LOG_FILE
-  echo $*
+  echo &>>$LOG_FILE  #used to introduce an empty line
+  echo &>>$LOG_FILE #used to introduce an empty line
+  echo " ####################################### $* ########################################" &>>$LOG_FILE #will be written to log file
+  echo $* #will be written to output screen.
+  # let's say we are passing PRINT Remove old content
+  # the output of this function will introduce two empty lines in the log file, then it will print ###Remove old content### in the logfile and then print PRINT Remove old content in the stdout
 }
 
 STAT() {
