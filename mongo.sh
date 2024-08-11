@@ -8,12 +8,11 @@
 
 source common.sh
 component=mongo
+repo_service=mongod
 
 # $? is used to get the exit status which is then fed to the stat function which is defined in common.sh
 
-PRINT Copy MongoDB repo file
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
-STAT $?
+COPY_REPO
 
 PRINT Install MongoDB
 dnf install mongodb-org -y &>>$LOG_FILE
@@ -25,7 +24,4 @@ STAT $?
 
 # s/127.0.0.1/0.0.0.0/ - substitution
 
-PRINT Start MongoDB Service
-systemctl enable mongod &>>$LOG_FILE
-systemctl restart mongod &>>$LOG_FILE
-STAT $?
+REPO_SETUP
