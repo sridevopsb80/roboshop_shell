@@ -139,7 +139,23 @@ STAT $?
 
 REPO_SETUP(){
 PRINT Start $component Service
+systemctl daemon-reload
 systemctl enable $repo_service &>>$LOG_FILE
 systemctl restart $repo_service &>>$LOG_FILE
 STAT $?
+}
+
+PYTHON(){
+  PRINT Install Python
+  dnf install python3 gcc python3-devel -y &>>$LOG_FILE
+  STAT $?
+
+  APP_PREREQ
+
+  PRINT Download Dependencies
+  cd /app
+  pip3 install -r requirements.txt &>>$LOG_FILE
+  STAT $?
+
+  SYSTEMD_SETUP
 }
