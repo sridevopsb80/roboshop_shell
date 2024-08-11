@@ -1,4 +1,4 @@
-LOG_FILE=/tmp/roboshop.log
+LOG_FILE=/root/roboshop.log
 rm -f $LOG_FILE
 code_dir=$(pwd)
 
