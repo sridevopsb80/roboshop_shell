@@ -103,8 +103,8 @@ JAVA() {
 
 SCHEMA_SETUP() {
   if [ "$schema_setup" == "mongo" ]; then
-    PRINT COpy MongoDB repo file
-    cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
+    PRINT Copy MongoDB repo file
+    cp /root/roboshop_shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
     STAT $?
 
     PRINT Install MongoDB Client
@@ -112,7 +112,7 @@ SCHEMA_SETUP() {
     STAT $?
 
     PRINT Load Master Data
-    mongosh --mongodb.dev.sridevops.site </app/db/master-data.js &>>$LOG_FILE
+    mongosh --host mongodb.dev.sridevops.site </app/db/master-data.js &>>$LOG_FILE
     STAT $?
   fi
 
