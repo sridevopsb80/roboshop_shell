@@ -159,3 +159,20 @@ PYTHON(){
 
   SYSTEMD_SETUP
 }
+
+GOLANG(){
+  PRINT Install golang
+  dnf install golang -y &>>$LOG_FILE
+  STAT $?
+
+  APP_PREREQ
+
+  PRINT Download Dependencies and Build Software
+  cd /app
+  go mod init dispatch &>>$LOG_FILE
+  go get &>>$LOG_FILE
+  go build &>>$LOG_FILE
+  STAT $?
+
+  SYSTEMD_SETUP
+}
