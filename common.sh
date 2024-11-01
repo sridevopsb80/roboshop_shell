@@ -9,6 +9,7 @@ PRINT() {
   echo $*
 }
 
+#STAT for status, just a function name to print success and failure messages based on the output of $? command. in case of failure, exit command is used to stop the script execution.
 STAT() {
   if [ $1 -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
