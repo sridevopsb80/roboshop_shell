@@ -1,3 +1,5 @@
+# value for variables that are defined here are declared in the individual service files
+
 LOG_FILE=/tmp/roboshop.log
 rm -f $LOG_FILE
 code_dir=$(pwd)
@@ -105,7 +107,7 @@ JAVA() {
 SCHEMA_SETUP() {
   if [ "$schema_setup" == "mongo" ]; then
     PRINT Copy MongoDB repo file
-    cp /root/roboshop_shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
+    cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
     STAT $?
 
     PRINT Install MongoDB Client
