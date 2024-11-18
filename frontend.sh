@@ -3,7 +3,7 @@
 # this is not the same as the file being executed.
 # to execute, you can use bash <filename.sh>
 # if the common.sh exists in another directory, provide the absolute pathname of the file
-# the values for variables component and app_path, which was defined in common.sh, are defined in the files wherever they are needed for execution.
+# the values for variables (which were defined in common.sh) component and app_path are defined in the files wherever they are needed for execution.
 
 source common.sh
 component=frontend
